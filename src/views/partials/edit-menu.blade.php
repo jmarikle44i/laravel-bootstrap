@@ -1,5 +1,5 @@
 <ul class="nav nav-tabs">
-    <li><a href="#main" data-toggle="tab">Main</a></li>
+    <li class="active"><a href="#main" data-toggle="tab">Main</a></li>
     @if( isset($uploadable) and $uploadable )
         <li><a href="#images" data-toggle="tab">Images</a></li>
     @endif
