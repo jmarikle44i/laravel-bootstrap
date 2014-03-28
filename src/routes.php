@@ -1,17 +1,22 @@
 <?php
+App::before(function($request)
+{
+	// Get the URL segment to use for routing
+	$urlSegment = Config::get('laravel-bootstrap::app.access_url');
 
-// Get the URL segment to use for routing
-$urlSegment = Config::get('laravel-bootstrap::app.access_url');
+	// Filter all requests ensuring a user is logged in when this filter is called
+	Route::filter('adminFilter', 'Davzie\LaravelBootstrap\Filters\Admin');
 
-// Filter all requests ensuring a user is logged in when this filter is called
-Route::filter('adminFilter', 'Davzie\LaravelBootstrap\Filters\Admin');
-
-Route::controller( $urlSegment.'/users'     , 'Davzie\LaravelBootstrap\Controllers\UsersController' );
-Route::controller( $urlSegment.'/galleries' , 'Davzie\LaravelBootstrap\Controllers\GalleriesController' );
-Route::controller( $urlSegment.'/settings'  , 'Davzie\LaravelBootstrap\Controllers\SettingsController' );
-Route::controller( $urlSegment.'/blocks'    , 'Davzie\LaravelBootstrap\Controllers\BlocksController' );
-Route::controller( $urlSegment.'/posts'     , 'Davzie\LaravelBootstrap\Controllers\PostsController' );
-Route::controller( $urlSegment              , 'Davzie\LaravelBootstrap\Controllers\DashController'  );
+	Route::group(array('namespace' => 'Davzie\LaravelBootstrap\Controllers', 'prefix' => $urlSegment), function()
+	{
+		Route::controller( '/users'     , 'UsersController' );
+		Route::controller( '/galleries' , 'GalleriesController' );
+		Route::controller( '/settings'  , 'SettingsController' );
+		Route::controller( '/blocks'    , 'BlocksController' );
+		Route::controller( '/posts'     , 'PostsController' );
+		Route::controller( '/'          , 'DashController'  );
+	});
+});
 
 /** Include IOC Bindings **/
 include __DIR__.'/bindings.php';

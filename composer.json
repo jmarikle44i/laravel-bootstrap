@@ -5,6 +5,10 @@
         {
             "name": "David Thorpe",
             "email": "davzie@davzie.com"
+        },
+        {
+            "name": "Joseph Marikle",
+            "email": "joe@44interactive.com"
         }
     ],
     "require": {
@@ -15,7 +19,8 @@
     "autoload": {
         "classmap": [
             "src/migrations",
-            "src/controllers"
+            "src/controllers",
+            "../../../app/controllers"
         ],
         "psr-0": {
             "Davzie\\LaravelBootstrap": "src/"

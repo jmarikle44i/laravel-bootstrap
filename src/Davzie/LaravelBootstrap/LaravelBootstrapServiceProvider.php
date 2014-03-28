@@ -18,6 +18,7 @@ class LaravelBootstrapServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
+		\View::addNamespace('laravel-bootstrap',array(app_path().'/views/packages/laravel-bootstrap'));
 		$this->package('davzie/laravel-bootstrap');
 		include __DIR__.'/../../routes.php'; // Do some routing here specific to this package
 	}
